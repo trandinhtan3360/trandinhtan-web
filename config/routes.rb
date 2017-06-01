@@ -5,8 +5,9 @@ Rails.application.routes.draw do
   get 'static_pages/help'
 
   get 'static_pages/about'
+  get  '/signup',  to: 'users#new'
 
   resources :microposts
   resources :users
-  root 'userss#index'
+  root 'users#index'
 end
