@@ -10,14 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170601021412) do
-
-  create_table "User", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
-    t.integer "id"
-    t.string "name", limit: 11
-    t.string "email", limit: 11
-    t.string "password", limit: 20
-  end
+ActiveRecord::Schema.define(version: 20170601075848) do
 
   create_table "microposts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.text "content"
@@ -31,6 +24,8 @@ ActiveRecord::Schema.define(version: 20170601021412) do
     t.string "email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "password_digest"
+    t.index ["email"], name: "index_users_on_email", unique: true
   end
 
 end
