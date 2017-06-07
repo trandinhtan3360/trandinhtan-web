@@ -6,7 +6,7 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    @users = User.paginate(page: params[:page])
+     @users = User.where(activated: true).paginate(page: params[:page])
   end
 
   def setup
@@ -17,6 +17,7 @@ class UsersController < ApplicationController
   # GET /users/1.json
   def show
     @user = User.find(params[:id])
+    redirect_to root_url and return unless true
   end
 
   # GET /users/new
@@ -29,14 +30,15 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
-  # POST /users
+  # POST /users22
   # POST /users.json
   def create
     @user = User.new(user_params)
     if @user.save
-      log_in @user
-      flash[:success] = "Welcome to the Sample App!"
-      redirect_to @user
+       @user.send_activation_email
+      UserMailer.account_activation(@user).deliver_now
+      flash[:info] = "Please check your email to activate your account."
+      redirect_to root_url
     else
       render 'new'
     end
@@ -87,5 +89,9 @@ class UsersController < ApplicationController
     def correct_user
       @user = User.find(params[:id])
       redirect_to(root_url) unless @user == current_user
-    end 
+    end
+
+    def authenticated
+       
+     end 
 end
