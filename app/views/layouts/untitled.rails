@@ -1,0 +1,38 @@
+<div class="container-fluid">
+  <div class="navbar-header ">     
+      <%= image_tag("framgia_logo.png", :alt => "rss feed",height: 120) %>
+  </div>
+ <!-- <ul class="nav navbar-nav">
+    <li><a href="/static_pages/home">Home</a></li>
+    <li><a href="/static_pages/about">About</a></li>
+    <li><a href="/static_pages/help">Help</a></li>
+    <li><%= link_to "Users", users_path %></li>
+  </ul>
+  <ul class="nav navbar-nav navbar-right">
+    <li><a href="/signup"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+    <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+  </ul> -->
+  <ul class="nav navbar-nav navbar-right">
+        <li><%= link_to "Home", root_path %></li>
+        <li><%= link_to "Help", help_path %></li>
+        <% if logged_in? %>
+          <li><%= link_to "Users", users_path %></li>
+          <li class="dropdown">
+            <a href="" class="dropdown-toggle" data-toggle="dropdown">
+              Account <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+              <li><%= link_to "Profile", current_user %></li>
+              <li><%= link_to "Settings", edit_user_path(current_user) %></li>
+              <li class="divider"></li>
+              <li>
+                <%= link_to "Log out", logout_path, method: :delete %>
+              </li>
+            </ul>
+          </li>
+        <% else %>
+         <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+        <% end %>
+  </ul>
+</div>
+
