@@ -92,6 +92,5 @@ class UsersController < ApplicationController
     end
 
     def authenticated
-       
-     end 
+    end 
 end
